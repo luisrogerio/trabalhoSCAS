@@ -13,6 +13,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -142,17 +143,17 @@ public class PessoaDAO implements Serializable {
         }
     }
     
-    public boolean verificaUsuario(String login, String senha){
+    public Pessoa verificaUsuario(String login, String senha){
         EntityManager em = getEntityManager();
         try {
             TypedQuery<Pessoa> query = em.createQuery("SELECT p FROM Pessoa p WHERE p.login = :login AND p.senha = :pass", Pessoa.class);
-            if(query.setParameter("login", login).setParameter("pass", senha).getSingleResult() != null){
-                return true;
-            }
+            Pessoa pessoa = query.setParameter("login", login).setParameter("pass", senha).getSingleResult();
+            return pessoa;
+        } catch (NoResultException e){
+            return null;
         } finally {
             em.close();
         }
-        return false;
     }
     
 }
