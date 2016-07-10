@@ -13,6 +13,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import model.Pessoa;
@@ -139,6 +140,19 @@ public class PessoaDAO implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    public boolean verificaUsuario(String login, String senha){
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Pessoa> query = em.createQuery("SELECT p FROM Pessoa p WHERE p.login = :login AND p.senha = :pass", Pessoa.class);
+            if(query.setParameter("login", login).setParameter("pass", senha).getSingleResult() != null){
+                return true;
+            }
+        } finally {
+            em.close();
+        }
+        return false;
     }
     
 }
