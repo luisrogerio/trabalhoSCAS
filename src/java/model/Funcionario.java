@@ -32,6 +32,7 @@ public class Funcionario extends Pessoa implements java.io.Serializable {
 
     public Funcionario(String setor, String gerente, int id, String nome, String nascimento, String logradouro, String cidade, String estado, String matricula, String login, String senha, String confirmasenha) {
         super(id, nome, nascimento, logradouro, cidade, estado, matricula, login, senha, confirmasenha);
+        this.idFuncionario = id;
         this.setor = setor;
         this.gerente = gerente;
     }

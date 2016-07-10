@@ -7,10 +7,6 @@ package controller;
 
 import dao.EditalDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +28,7 @@ public class PesquisaEditalController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+   protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("editais", EditalDAO.getInstance().obterEditais());
         RequestDispatcher view = request.getRequestDispatcher("/pesquisaEdital.jsp");
         view.forward(request, response);
@@ -50,11 +46,7 @@ public class PesquisaEditalController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       try {
-           processRequest(request, response);
-       } catch (SQLException ex) {
-           Logger.getLogger(PesquisaEditalController.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        processRequest(request, response);
     }
 
     /**
@@ -68,11 +60,7 @@ public class PesquisaEditalController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       try {
-           processRequest(request, response);
-       } catch (SQLException ex) {
-           Logger.getLogger(PesquisaEditalController.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        processRequest(request, response);
     }
 
     /**

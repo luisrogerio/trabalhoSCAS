@@ -5,12 +5,18 @@
  */
 package controller;
 
+import dao.BolsistacontempladoDAO;
+import dao.EditalDAO;
+import dao.exceptions.NonexistentEntityException;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Bolsistacontemplado;
 
 /**
  *
@@ -18,29 +24,72 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ManterBolsistaContempladoController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ManterBolsistaContempladoController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ManterBolsistaContempladoController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String acao = request.getParameter("acao");
+        if (acao.equals("prepararOperacao")) {
+            prepararOperacao(request, response);
+        }
+        if (acao.equals("confirmarOperacao")) {
+            confirmarOperacao(request, response);
+        }
+    }
+
+    public void prepararOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+        try {
+            String operacao = request.getParameter("operacao");
+            request.setAttribute("operacao", operacao);
+            request.setAttribute("editais", EditalDAO.getInstance().obterEditais());
+            if (!operacao.equals("incluir")) {
+                Integer id = Integer.parseInt(request.getParameter("id"));
+                Bolsistacontemplado bolsistacontemplado;
+                bolsistacontemplado = BolsistacontempladoDAO.getInstance().obterBolsistacontemplado(id);
+                request.setAttribute("bolsistacontemplado", bolsistacontemplado);
+            }
+            RequestDispatcher view = request.getRequestDispatcher("/manterBolsistaContemplado.jsp");
+            view.forward(request, response);
+        } catch (ServletException e) {
+            throw e;
+        } catch (IOException e) {
+            throw new ServletException(e);
+        }
+
+    }
+
+    public void confirmarOperacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Bolsistacontemplado bolsistacontemplado = null;
+        try {
+            String operacao = request.getParameter("operacao");
+            int id = Integer.parseInt(request.getParameter("txtid"));
+            int codEdital = Integer.parseInt(request.getParameter("optEdital"));
+
+            /*Professor coordenador = null;
+             if(codCoordenador != 0){
+             coordenador = ProfessorDAO.getInstance().getProfessor(codCoordenador);
+             }*/
+            if (operacao.equals("incluir")) {
+
+                bolsistacontemplado = new Bolsistacontemplado(id, EditalDAO.getInstance().obterEdital(codEdital));
+
+                BolsistacontempladoDAO.getInstance().salvar(bolsistacontemplado);
+            } else if (operacao.equals("editar")) {
+                bolsistacontemplado = new Bolsistacontemplado(id, EditalDAO.getInstance().obterEdital(codEdital));
+                BolsistacontempladoDAO.getInstance().atualizar(bolsistacontemplado);
+            } else if (operacao.equals("excluir")) {
+                bolsistacontemplado = new Bolsistacontemplado();
+                bolsistacontemplado.setId(id);
+                BolsistacontempladoDAO.getInstance().excluir(bolsistacontemplado.getId());
+            }
+            RequestDispatcher view = request.getRequestDispatcher("PesquisaBolsistaContempladoController");
+            view.forward(request, response);
+        } catch (ServletException e) {
+            throw e;
+        } catch (IOException e) {
+            throw new ServletException(e);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ManterBolsistaContempladoController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ManterBolsistaContempladoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

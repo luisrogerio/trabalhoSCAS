@@ -32,7 +32,7 @@ public class PesquisaBolsaController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
- protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("bolsas", BolsaDAO.getInstance().obterBolsas());
         RequestDispatcher view = request.getRequestDispatcher("/pesquisaBolsa.jsp");
         view.forward(request, response);
@@ -50,11 +50,9 @@ public class PesquisaBolsaController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     try {
-         processRequest(request, response);
-     } catch (SQLException ex) {
-         Logger.getLogger(PesquisaBolsaController.class.getName()).log(Level.SEVERE, null, ex);
-     }
+
+        processRequest(request, response);
+
     }
 
     /**
@@ -68,11 +66,7 @@ public class PesquisaBolsaController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     try {
-         processRequest(request, response);
-     } catch (SQLException ex) {
-         Logger.getLogger(PesquisaBolsaController.class.getName()).log(Level.SEVERE, null, ex);
-     }
+        processRequest(request, response);
     }
 
     /**

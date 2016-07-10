@@ -37,6 +37,10 @@
                     <td>Senha:</td> 
                     <td><input type="text" name="txtSenha" value="${funcionario.senha}" <c:if test="${operacao == 'excluir'}"> readonly</c:if>></td>
                 </tr>
+                <tr>
+                    <td>Confirmar Senha:</td> 
+                    <td><input type="text" name="txtSenha" value="${funcionario.senha}" <c:if test="${operacao == 'excluir'}"> readonly</c:if>></td>
+                </tr>
                       
                 
                        <tr>
@@ -63,61 +67,6 @@
                     <td><input type="submit" name="btnConfirmar" value="Confirmar"></td>
                 </tr>
             </table>
-        </form>
-        <SCRIPT language="JavaScript">
-            <!--
-            
-            function campoNumerico(valor)
-            {
-                var caracteresValidos = "0123456789";
-                var ehNumero = true;
-                var umCaracter;
-                for (i = 0; i < valor.length && ehNumero == true; i++) 
-                { 
-                    umCaracter = valor.charAt(i); 
-                    if (caracteresValidos.indexOf(umCaracter) == -1) 
-                    {
-                        ehNumero = false;
-                    }
-                }
-                return ehNumero;
-            }
-
-            function validarFormulario(form) { 
-                var mensagem;
-                mensagem = "";
-                if (form.txtCodFuncionario.value == ""){
-                    mensagem = mensagem + "Informe o Código do Funcionario\n";
-                }                             
-                if (form.txtNomeFuncionario.value == ""){
-                    mensagem = mensagem + "Informe o Nome do Funcionario\n";
-                }             
-                if (form.txtNascimento.value == ""){
-                    mensagem = mensagem + "Informe o nasicmento do Funcionario\n";
-                }                  
-                if (form.txtLogin.value == ""){
-                    mensagem = mensagem + "Informe o Login do Funcionario\n";
-                }  
-                                 
-                if (form.txtSenha.value == ""){
-                    mensagem = mensagem + "Informe a Senha do Funcionario\n";
-                } 
-                if (!campoNumerico(form.txtCodFuncionario.value)){
-                    mensagem = mensagem + "Código do Funcionario deve ser numérico\n";
-                } 
-                if (!campoNumerico(form.txtNascimento.value)){
-                    mensagem = mensagem + "Nascimento do Funcionario deve ser numérico\n";
-                }     
-                          
-                             
-                if (mensagem == ""){
-                    return true;
-                }else{
-                    alert(mensagem);
-                    return false;
-                }                
-            } 
-            //-->
-        </SCRIPT>        
+        </form> 
     </body>
 </html>

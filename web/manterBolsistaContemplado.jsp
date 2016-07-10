@@ -36,17 +36,6 @@
                     </td>
                 </tr>
 
-                <tr>
-                    <td>Candidato:</td>
-                    <td>
-                        <select name="optCandidatos" <c:if test="${operacao == 'excluir'}"> readonly</c:if>>
-                            <option value="0" <c:if test="${bolsistacontemplado.candidato.idCandidatos == null}"> selected</c:if>> </option>  
-                            <c:forEach items="${candidatos}" var="candidato">
-                                <option value="${candidato.idCandidatos}" <c:if test="${bolsistacontemplado.candidato.idCandidatos == candidato.idCandidatos}"> selected</c:if>>${candidato.nome}</option>  
-                            </c:forEach>
-                        </select>
-                    </td>
-                </tr>
 
                 <tr>
                     <td><input type="submit" name="btnConfirmar" value="Confirmar"></td>

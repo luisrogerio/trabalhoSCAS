@@ -40,6 +40,7 @@ public class Candidato extends Pessoa implements java.io.Serializable {
 
     public Candidato(Bolsistacontemplado bolsistacontemplado, Curso curso, Formulariosocioeconomico formulariosocioeconomico, int id, String nome, String nascimento, String logradouro, String cidade, String estado, String matricula, String login, String senha, String confirmasenha) {
         super(id, nome, nascimento, logradouro, cidade, estado, matricula, login, senha, confirmasenha);
+        this.idCandidato = id;
         this.bolsistacontemplado = bolsistacontemplado;
         this.curso = curso;
         this.formulariosocioeconomico = formulariosocioeconomico;
