@@ -66,6 +66,7 @@ public class ManterCandidatoController extends HttpServlet {
         try {
             String operacao = request.getParameter("operacao");
 
+            Integer id = Integer.parseInt(request.getParameter("txtCodCandidato"));
             String nome = request.getParameter("txtNomeCandidato");
             String nascimento = request.getParameter("txtNascimento");
             String logradouro = request.getParameter("txtEndereco");
@@ -74,27 +75,23 @@ public class ManterCandidatoController extends HttpServlet {
             String matricula = request.getParameter("txtMatricula");
             int idForm = Integer.parseInt(request.getParameter("optForm"));
             int codCurso = Integer.parseInt(request.getParameter("optCurso"));
-
-            /*Professor coordenador = null;
-             if(codCoordenador != 0){
-             coordenador = ProfessorDAO.getInstance().getProfessor(codCoordenador);
-             }*/
+            int codBolsista = Integer.parseInt(request.getParameter("optBolsista"));
+            
             if (operacao.equals("incluir")) {
-
-                candidato = new Candidato(null, 
+                candidato = new Candidato(BolsistacontempladoDAO.getInstance().obterBolsistacontemplado(codBolsista), 
                         CursoDAO.getInstance().obterCurso(codCurso), 
-                        null, 
+                        FormulariosocioeconomicoDAO.getInstance().obterFormulariosocioeconomico(idForm), 
                         idForm, nome, nascimento, logradouro, cidade, estado, matricula, nome, estado, cidade);
-
                 CandidatoDAO.getInstance().salvar(candidato);
             } else if (operacao.equals("editar")) {
-                candidato.setIdCandidato(idCandidato);
-                candidato.setTurno(turno);
-                candidato.setCandidato(candidatos);
-                candidato.setTotalPeriodos(totalPeriodos);
+                candidato = new Candidato(BolsistacontempladoDAO.getInstance().obterBolsistacontemplado(codBolsista), 
+                        CursoDAO.getInstance().obterCurso(codCurso), 
+                        FormulariosocioeconomicoDAO.getInstance().obterFormulariosocioeconomico(idForm), 
+                        idForm, nome, nascimento, logradouro, cidade, estado, matricula, nome, estado, cidade);
                 CandidatoDAO.getInstance().atualizar(candidato);
             } else if (operacao.equals("excluir")) {
-                candidato.setIdCandidato(idCandidato);
+                candidato = new Candidato();
+                candidato.setIdCandidato(id);
                 CandidatoDAO.getInstance().excluir(candidato.getId());
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaCandidatoController");
