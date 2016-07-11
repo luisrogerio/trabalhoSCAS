@@ -59,9 +59,9 @@
                     <td>Formulario:</td>
                     <td>
                         <select name="optForm" <c:if test="${operacao == 'excluir'}"> readonly</c:if>>
-                            <option value="0" <c:if test="${candidato.form.id == null}"> selected</c:if>> </option>  
+                            <option value="0" <c:if test="${candidato.formulariosocioeconomico.id == null}"> selected</c:if>> </option>  
                             <c:forEach items="${formulariosSocioEconomicos}" var="formularioSocioEconomico">
-                                <option value="${formularioSocioEconomico.id}" <c:if test="${candidato.form.id == formularioSocioEconomico.id}"> selected</c:if>>${formularioSocioEconomico.nome}</option>  
+                                <option value="${formularioSocioEconomico.id}" <c:if test="${candidato.formulariosocioeconomico.id == formularioSocioEconomico.id}"> selected</c:if>>${formularioSocioEconomico.nome}</option>  
                             </c:forEach>
                         </select>
                     </td>
@@ -72,8 +72,8 @@
                     <td>
                         <select name="optBolsista" <c:if test="${operacao == 'excluir'}"> readonly</c:if>>
                             <option value="0" <c:if test="${candidato.bolsistacontemplado.id == null}"> selected</c:if>> </option>  
-                            <c:forEach items="${bolsistacontemplado}" var="bolsistacontemplado">
-                                <option value="${bolsistacontemplado.id}" <c:if test="${candidato.bolsistacontemplado.id == bolsistacontemplado.id}"> selected</c:if>>${bolsistacontemplado.nome}</option>  
+                            <c:forEach items="${bolsistascontemplados}" var="bolsistacontemplado">
+                                <option value="${bolsistacontemplado.id}" <c:if test="${candidato.bolsistacontemplado.id == bolsistacontemplado.id}"> selected</c:if>>${bolsistacontemplado.id}</option>  
                             </c:forEach>
                         </select>
                     </td>

@@ -81,18 +81,18 @@ public class ManterCandidatoController extends HttpServlet {
                 candidato = new Candidato(BolsistacontempladoDAO.getInstance().obterBolsistacontemplado(codBolsista), 
                         CursoDAO.getInstance().obterCurso(codCurso), 
                         FormulariosocioeconomicoDAO.getInstance().obterFormulariosocioeconomico(idForm), 
-                        idForm, nome, nascimento, logradouro, cidade, estado, matricula, nome, estado, cidade);
+                        id, nome, nascimento, logradouro, cidade, estado, matricula, nome, estado, cidade);
                 CandidatoDAO.getInstance().salvar(candidato);
             } else if (operacao.equals("editar")) {
                 candidato = new Candidato(BolsistacontempladoDAO.getInstance().obterBolsistacontemplado(codBolsista), 
                         CursoDAO.getInstance().obterCurso(codCurso), 
                         FormulariosocioeconomicoDAO.getInstance().obterFormulariosocioeconomico(idForm), 
-                        idForm, nome, nascimento, logradouro, cidade, estado, matricula, nome, estado, cidade);
+                        id, nome, nascimento, logradouro, cidade, estado, matricula, nome, estado, cidade);
                 CandidatoDAO.getInstance().atualizar(candidato);
             } else if (operacao.equals("excluir")) {
                 candidato = new Candidato();
                 candidato.setIdCandidato(id);
-                CandidatoDAO.getInstance().excluir(candidato.getId());
+                CandidatoDAO.getInstance().excluir(candidato.getIdCandidato());
             }
             RequestDispatcher view = request.getRequestDispatcher("PesquisaCandidatoController");
             view.forward(request, response);

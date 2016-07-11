@@ -22,12 +22,12 @@
                 <th>Nome Candidato</th>
                 <th colspan="2">Açao</th>
             </tr>
-            <c:forEach items="${candidatos}" var="candidatos">
+            <c:forEach items="${candidatos}" var="candidato">
                 <tr> 
-                    <td><c:out value="${candidatos.idCandidatos}" /></td>
-                    <td><c:out value="${candidatos.nome}" /></td>
-                    <td><a href="ManterCandidatoController?acao=prepararOperacao&operacao=editar&codCandidato=<c:out value="${candidatos.idCandidatos}"/>">Editar</a></td>
-                    <td><a href="ManterCandidatoController?acao=prepararOperacao&operacao=excluir&codCandidato=<c:out value="${candidatos.idCandidatos}"/>">Excluir</a></td>
+                    <td><c:out value="${candidato.idCandidato}" /></td>
+                    <td><c:out value="${candidato.nome}" /></td>
+                    <td><a href="ManterCandidatoController?acao=prepararOperacao&operacao=editar&codCandidato=<c:out value="${candidato.idCandidato}"/>">Editar</a></td>
+                    <td><a href="ManterCandidatoController?acao=prepararOperacao&operacao=excluir&codCandidato=<c:out value="${candidato.idCandidato}"/>">Excluir</a></td>
                 </tr>
             </c:forEach>
         </table>

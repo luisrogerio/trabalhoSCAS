@@ -29,7 +29,7 @@ public class PesquisaCandidatoController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("cursos", CandidatoDAO.getInstance().obterCandidatos());
+        request.setAttribute("candidatos", CandidatoDAO.getInstance().obterCandidatos());
         RequestDispatcher view = request.getRequestDispatcher("/pesquisaCandidato.jsp");
         view.forward(request, response);
     }
