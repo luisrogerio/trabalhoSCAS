@@ -56,6 +56,14 @@
         <servlet-name>ManterBolsaController</servlet-name>
         <servlet-class>controller.ManterBolsaController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GerarRelatorios</servlet-name>
+        <servlet-class>controller.GerarRelatorios</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PrepararRelatorios</servlet-name>
+        <servlet-class>controller.PrepararRelatorios</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PesquisaFuncionarioController</servlet-name>
         <url-pattern>/PesquisaFuncionarioController</url-pattern>
@@ -111,6 +119,14 @@
     <servlet-mapping>
         <servlet-name>ManterBolsaController</servlet-name>
         <url-pattern>/ManterBolsaController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerarRelatorios</servlet-name>
+        <url-pattern>/GerarRelatorios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PrepararRelatorios</servlet-name>
+        <url-pattern>/PrepararRelatorios</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
